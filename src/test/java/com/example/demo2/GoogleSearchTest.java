@@ -41,6 +41,7 @@ public class GoogleSearchTest {
 
     @AfterMethod
     public void tearDown() {
+        Selenide.closeWindow();
         Selenide.closeWebDriver();
     }
 
