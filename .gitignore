@@ -10,3 +10,4 @@ mvnw
 allure-results/
 target/
 build/
+.allure/
