@@ -27,7 +27,21 @@ public class GoogleSearchTest {
     @BeforeClass
     public static void setUpAll() {
         Configuration.browser = "chrome";
-        WebDriverRunner.setWebDriver(new ChromeDriver(new ChromeOptions().addArguments("--start-maximized")));
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments(
+                "--start-maximized",
+                "--disable-blink-features=AutomationControlled",
+                "--disable-infobars",
+                "--disable-notifications",
+                "--disable-popup-blocking",
+                "--disable-save-password-bubble",
+                "--disable-translate",
+                "--no-sandbox",
+                "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36");
+        options.setExperimentalOption("excludeSwitches", new String[] { "enable-automation" });
+        options.setExperimentalOption("useAutomationExtension", false);
+
+        WebDriverRunner.setWebDriver(new ChromeDriver(options));
         WebDriverRunner.getWebDriver().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
         Configuration.timeout = 10000;
         SelenideLogger.addListener("allure", new AllureSelenide());
@@ -35,7 +49,6 @@ public class GoogleSearchTest {
 
     @BeforeMethod
     public void setUp() {
-        Configuration.browserCapabilities = new ChromeOptions().addArguments("--remote-allow-origins=*");
         open("https://www.google.com/");
     }
 

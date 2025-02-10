@@ -1,0 +1,11 @@
+.mvn
+mvnw
+mvnw.cmd
+mvnw
+.idea
+.vscode
+.DS_Store
+.gradle
+.idea
+allure-results/
+target/
